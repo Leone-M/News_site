@@ -22,7 +22,7 @@ export var products = [
 ];
 
 var json_data = readFileSync(
-  "News/app/lib/news_data.json",
+  "@/app/lib/news_data.json",
   "utf-8"
 );
 
