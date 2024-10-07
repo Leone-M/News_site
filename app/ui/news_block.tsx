@@ -1,6 +1,13 @@
-import { readFileSync } from "fs";
+/* eslint-disable @next/next/no-document-import-in-page */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-var */
+import { PathOrFileDescriptor, readFileSync, writeFileSync } from "fs";
 import { prototype } from "module";
+import jsonfile from "@/app/lib/news_data.json"
 import { Html } from "next/document";
+import path from "path";
+
 
 // start from
 export var products = [
@@ -21,10 +28,22 @@ export var products = [
   },
 ];
 
-var json_data = readFileSync(
-  "@/app/lib/news_data.json",
-  "utf-8"
-);
+const nextjs_directory: string = process.cwd()
+const data_json_directory: string = nextjs_directory + "/app/lib/news_data.json"
+
+interface news_interface {
+  title: string,
+  img_link: string,
+  article: string
+}
+
+// jsonfile.news.push({
+//   title: "Test_adding",
+//   img_link: "Test_img",
+//   text: "test_texting"
+// });
+// writeFileSync(data_json_directory, JSON.stringify(jsonfile))
+
 
 // arr of news blocks
 export var news: any[] = [];
@@ -54,13 +73,13 @@ export default function NewsBlock() {
       news.push(
         <div>
           <div>
-            <Title title={Block.title} />
+            <Title key="Title" title={Block.title} />
           </div>
           <div>
-            <PreviewImage image_url={Block.img_link} />
+            <PreviewImage key="Image" image_url={Block.img_link} />
           </div>
           <div>
-            <Article text={Block.text} />
+            <Article key="article" text={Block.text} />
           </div>
         </div>
       );

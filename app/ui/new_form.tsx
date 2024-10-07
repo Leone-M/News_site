@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-document-import-in-page */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { Html } from "next/document";
 
@@ -14,7 +16,7 @@ function AddingData() {
 export default function ApplicationButton() {
   return (
     <div>
-      <button type="button" onClick={AddingData}>
+      <button key="New_button" type="button" onClick={AddingData}>
         Add data
       </button>
     </div>

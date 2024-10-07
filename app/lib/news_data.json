@@ -1,15 +1,1 @@
-
-{ "news":[
-    { "title": "Cabbage",
-      "img_link": "https://i.playground.ru/i/pix/776621/image.jpg",
-      "text": "Anime..." },
-    { "title": "Carrot",
-      "img_link": "https://i.playground.ru/i/pix/776621/image.jpg",
-      "text": "5187818578128ridfnhBN(Qfji3oqjwf8ioj"
-    },
-    { "title": "Potato",
-      "img_link": "https://i.playground.ru/i/pix/776621/image.jpg",
-      "text": "5187818578128ridfnhBN(Qfji3oqjwf8ioj"
-    }
-]
-}
+{"news":[{"title":"Cabbage","img_link":"https://i.playground.ru/i/pix/776621/image.jpg","text":"Anime..."}]}
