@@ -26,8 +26,6 @@ export var products = [
 //   "utf-8"
 // );
 
-// anime geijgedioj
-
 // arr of news blocks
 export var news: any[] = [];
 // to control news updates
