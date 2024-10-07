@@ -21,10 +21,10 @@ export var products = [
   },
 ];
 
-// var json_data = readFileSync(
-//   "News/app/lib/news_data.json",
-//   "utf-8"
-// );
+var json_data = readFileSync(
+  "News/app/lib/news_data.json",
+  "utf-8"
+);
 
 // arr of news blocks
 export var news: any[] = [];
