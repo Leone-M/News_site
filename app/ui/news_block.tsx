@@ -7,43 +7,17 @@ import { prototype } from "module";
 import jsonfile from "@/app/lib/news_data.json"
 import { Html } from "next/document";
 import path from "path";
+import data_fetch from "@/app/lib/script"
+import {news_interface} from "@/app/lib/script"
 
+var news_posts: news_interface[] = []
 
-// start from
-export var products = [
-  {
-    title: "Cabbage",
-    img_link: "https://i.playground.ru/i/pix/776621/image.jpg",
-    text: "Anime...",
-  },
-  {
-    title: "Carrot",
-    img_link: "https://i.playground.ru/i/pix/776621/image.jpg",
-    text: "5187818578128ridfnhBN(Qfji3oqjwf8ioj",
-  },
-  {
-    title: "Potato",
-    img_link: "https://i.playground.ru/i/pix/776621/image.jpg",
-    text: "5187818578128ridfnhBN(Qfji3oqjwf8ioj",
-  },
-];
-
-const nextjs_directory: string = process.cwd()
-const data_json_directory: string = nextjs_directory + "/app/lib/news_data.json"
-
-interface news_interface {
-  title: string,
-  img_link: string,
-  article: string
+async function fetching_posts() {
+  var posts_data: news_interface[] = await data_fetch()
+  posts_data.forEach(post => {
+    news_posts.push(post)
+  });
 }
-
-// jsonfile.news.push({
-//   title: "Test_adding",
-//   img_link: "Test_img",
-//   text: "test_texting"
-// });
-// writeFileSync(data_json_directory, JSON.stringify(jsonfile))
-
 
 // arr of news blocks
 export var news: any[] = [];
@@ -67,19 +41,21 @@ function Title({ title }: { title: string }) {
 
 // Group of news blocks
 export default function NewsBlock() {
+  fetching_posts()
+  console.log(news_posts)
   // determines one news block and add if missing
-  if (products.length > news_amount) {
-    products.forEach((Block) => {
+  if (news.length > news_amount) {
+    news_posts.forEach((Block) => {
       news.push(
         <div>
           <div>
             <Title key="Title" title={Block.title} />
           </div>
           <div>
-            <PreviewImage key="Image" image_url={Block.img_link} />
+            <PreviewImage key="Image" image_url={Block.image_url} />
           </div>
           <div>
-            <Article key="article" text={Block.text} />
+            <Article key="article" text={Block.article} />
           </div>
         </div>
       );

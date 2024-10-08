@@ -2,11 +2,20 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+export interface news_interface {
+  title: string | undefined,
+  image_url: string | undefined,
+  article: string | undefined
+}
 
-
-async function main() {
+export default async function main() {
   // ... you will write your Prisma Client queries here
-    const all_posts = await prisma.newsPost.findMany()
+    const posts = await prisma.newsPost.findMany()
+    const result: news_interface[] | null = [];
+    posts.forEach(post => {
+      result.push(post)
+    });
+    return result;
 }
 
 // main()
