@@ -40,12 +40,12 @@ function Title({ title }: { title: string }) {
 }
 
 // Group of news blocks
-export default function NewsBlock() {
-  fetching_posts()
-  console.log(news_posts)
+export default async function NewsBlock() {
+  await fetching_posts()
   // determines one news block and add if missing
-  if (news.length > news_amount) {
+  if (news.length >= news_amount) {
     news_posts.forEach((Block) => {
+      console.log(Block)
       news.push(
         <div>
           <div>
