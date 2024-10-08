@@ -60,7 +60,7 @@ export default function NewsBlock() {
         </div>
       );
     });
-    news_amount = products.length;
+    news_amount = news_posts.length;
   }
   // returns all news in <div> block
   return <div>{news}</div>;
