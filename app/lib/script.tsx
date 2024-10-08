@@ -1,11 +1,15 @@
 import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { title } from 'process';
+export const prisma = new PrismaClient()
 
 export interface news_interface {
   title: string | undefined,
   image_url: string | undefined,
   article: string | undefined
+}
+
+export async function fetcher() {
+  //
 }
 
 export default async function main() {
