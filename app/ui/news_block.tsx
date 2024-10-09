@@ -24,7 +24,6 @@ async function fetching_posts() {
 // arr of news blocks
 export var news: any[] = [];
 // to control news updates
-var news_amount = 0;
 
 // news preview image
 function PreviewImage({ image_url }: { image_url: string }) {
@@ -54,7 +53,7 @@ export default async function NewsBlock() {
             <Title key="Title" title={Block.title}/>
           </div>
           <div className="">
-            <PreviewImage className="" key="Image" image_url={Block.image_url} />
+            <PreviewImage key="Image" image_url={Block.image_url} />
           </div>
           <div>
             <Article key="article" text={Block.article} />

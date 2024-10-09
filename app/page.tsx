@@ -1,4 +1,3 @@
-import Image from "next/image";
 import NewsBlock from "./ui/news_block";
 import ApplicationButton from "./ui/new_form";
 

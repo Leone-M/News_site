@@ -3,6 +3,18 @@
 ```
 npm install
 ```
+Далее надо инициализировать базу данных prisma
+```
+npx prisma --init --datasource-provider sqlite
+```
+В созданой папке prisma добавляем в shema модель из schema.prisma_just_for_copying
+чтобы импортировать модель данных
+
+Далее синхронизируем модель с базой данных
+```
+npx prisma migrate dev --name init
+```
+Вуаля можно добавлять посты на своём клонированом
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
