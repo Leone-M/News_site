@@ -12,7 +12,7 @@ export default function ApplicationButton() {
     image_url: form_data.get("image_url"),
     article: form_data.get("article")
   }
-  await fetch("http:localhost:3000/api", {method: "POST", body: form_data})
+  await fetch("http:localhost:3000/api/new_post", {method: "POST", body: form_data})
   }
   return (
     <div className=" grid-flow-col">

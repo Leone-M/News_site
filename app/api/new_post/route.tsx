@@ -8,6 +8,8 @@ export async function string_parser(){
 }
 
 export async function POST(request) {
+  console.log(request.headers)
+  console.log(request.headers.get("Content-type"));
   const stream = request.body;
   const reader = stream.getReader();
   var parsed_string: string = "";
