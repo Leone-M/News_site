@@ -1,5 +1,7 @@
 "use server";
-import { prisma } from "@/app/lib/script"
+import { prisma } from "@/app/lib/data_acces"
+import { news_interface } from "@/app/lib/data_acces";
+import { News_data } from "@/app/lib/data_acces"
 
 export async function string_parser(content_type: string, parsed_body: string){
   content_type = "--" + content_type.replace("multipart/form-data; boundary=", "");
@@ -21,24 +23,23 @@ export async function string_parser(content_type: string, parsed_body: string){
     keys.push(bufarr[0]);
     values.push(bufarr[1]);
   })
-  const data_base_ready_dict = new Object();
-  for (let i = 0; i < keys.length; i++) {
-    data_base_ready_dict[keys[i]] = values[i];
-  }
+  const data_base_ready: news_interface = new News_data;
+  data_base_ready.title = values[0]
+  data_base_ready.image_url = values[1]
+  data_base_ready.article = values[2]
   await prisma.newsPost.create({
-    data: data_base_ready_dict
+    data: data_base_ready
   })
 }
 
 export async function POST(request: Request) {
-  console.log("REQUESTING POST");
-  const content_type = request.headers.get("content-type")
-  let chunks = [], decoder = new TextDecoder();
-  for await (const chunk of request.body){
+  const content_type: string = request.headers.get("content-type") + ""
+  const body: ReadableStream | null = request.body
+  const chunks = [], decoder = new TextDecoder();
+  for await (const chunk of body){
     chunks.push(decoder.decode(chunk))
   }
   const parsed_string: string = chunks[0]
-  string_parser(content_type, parsed_string)
-  console.log("FINISHED REQUESTING")
+  string_parser(content_type, parsed_string).catch(err => console.log("No content: " + err))
   return new Response()
 }

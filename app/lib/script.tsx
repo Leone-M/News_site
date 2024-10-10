@@ -1,22 +1,17 @@
-import { PrismaClient } from '@prisma/client'
-export const prisma = new PrismaClient()
+"use server";
+import { news_interface } from './data_acces';
+import { prisma } from './data_acces';
 
-export interface news_interface {
-  title: string,
-  image_url: string,
-  article: string
+export async function post_req(form_data: FormData) {
+  "use server";
+  await fetch("http:localhost:3000/api/new_post", {method: "POST", body: form_data})
 }
 
-export async function fetcher() {
-  //
-}
-
-export default async function main() {
-  // ... you will write your Prisma Client queries here
-    const posts = await prisma.newsPost.findMany()
-    const result: news_interface[] | null = [];
-    posts.forEach(post => {
-      result.push(post)
-    });
-    return result;
+export default async function fetching_posts(news_arr: news_interface[]) {
+  news_arr = []
+  const posts_data: news_interface[] = await prisma.newsPost.findMany()
+  posts_data.forEach(post => {
+    news_arr.push(post)
+  });
+  return news_arr;
 }

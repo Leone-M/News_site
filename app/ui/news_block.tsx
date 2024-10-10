@@ -2,32 +2,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-var */
-import { PathOrFileDescriptor, readFileSync, writeFileSync } from "fs";
-import { prototype } from "module";
-import jsonfile from "@/app/lib/news_data.json"
-import { Html } from "next/document";
-import path from "path";
-import { fetcher } from "@/app/lib/script";
-import data_fetch from "@/app/lib/script"
-import {news_interface} from "@/app/lib/script"
+import {news_interface} from "@/app/lib/data_acces"
+import post_fetcher from "@/app/lib/script"
+import Image from "next/image";
 
 var news_posts: news_interface[] = []
 
-async function fetching_posts() {
-  news_posts = []
-  var posts_data: news_interface[] = await data_fetch()
-  posts_data.forEach(post => {
-    news_posts.push(post)
-  });
-}
-
 // arr of news blocks
-export var news: any[] = [];
+var news: any[] = [];
 // to control news updates
 
 // news preview image
 function PreviewImage({ image_url }: { image_url: string }) {
-  return <img className=" " src={image_url}/>;
+  return <Image width={500} height={500} alt="PostPreview" src={image_url}/>;
 }
 
 // news text
@@ -42,7 +29,7 @@ function Title({ title }: { title: string }) {
 
 // Group of news blocks
 export default async function NewsBlock() {
-  await fetching_posts()
+  news_posts = await post_fetcher(news_posts)
   // determines one news block and add if missing
   if (news_posts.length > news.length) {
     var news_blocks: any[] = [];
