@@ -5,18 +5,16 @@ import { usePathname } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function ApplicationButton() {
-  async function createInvoice(form_data: FormData) {
-  "use server";
-  const raw_form_data = {
-    title: form_data.get("title"),
-    image_url: form_data.get("image_url"),
-    article: form_data.get("article")
-  }
-  await fetch("http:localhost:3000/api/new_post", {method: "POST", body: form_data})
+  async function post_req(event: Event) {
+    "use server";
+    event.preventDefault()
+    event.target?.addEventListener("formdata", (ev) => async (ev) => {
+      await fetch("http:localhost:3000/api/new_post", {method: "POST", body: ev.formData})
+    })
   }
   return (
     <div className=" grid-flow-col">
-      <form className=" flex justify-evenly" action={createInvoice} method="post" id="post_form" target="_parent">
+      <form className=" flex justify-evenly" method="post" id="post_form" target="_parent">
         <div className=" flex">
           <label className="" htmlFor="title">
           <input className=" bg-zinc-700" type="text" name="title" id="title" required/>
@@ -29,7 +27,7 @@ export default function ApplicationButton() {
         </div>
         <div className="flex">
           <label className="" htmlFor="article">
-          <input className=" bg-zinc-700" type="text" name="article" id="article" required />
+          <input onSubmit={post_req(event)} className=" bg-zinc-700" type="text" name="article" id="article" required />
           </label>
         </div>
         <div className="flex">
