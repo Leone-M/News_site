@@ -3,7 +3,6 @@
 "use client";
 import { Html } from "next/document";
 import {post_req} from "@/app/lib/script"
-import { useEffect } from "react";
 
 export default function ApplicationButton() {
   return (
