@@ -1,5 +1,5 @@
 "use server";
-import { news_interface } from './data_acces';
+import { News_data, news_interface } from './data_acces';
 import { prisma } from './data_acces';
 
 export async function post_req(form_data: FormData) {

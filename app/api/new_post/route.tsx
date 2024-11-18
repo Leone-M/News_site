@@ -27,6 +27,7 @@ export async function string_parser(content_type: string, parsed_body: string){
   data_base_ready.title = values[0]
   data_base_ready.image_url = values[1]
   data_base_ready.article = values[2]
+  data_base_ready.date = values[3]
   await prisma.newsPost.create({
     data: data_base_ready
   })

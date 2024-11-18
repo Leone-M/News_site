@@ -6,11 +6,13 @@ export class News_data implements news_interface{
     "title": string;
     "image_url": string;
     "article": string;
+    "date": string;
   };
   
   export interface news_interface {
     id: number
     title: string,
     image_url: string,
-    article: string
+    article: string,
+    date: string;
   }
