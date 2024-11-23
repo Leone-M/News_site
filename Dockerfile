@@ -11,9 +11,12 @@ COPY package.json package-lock.json* ./
 RUN npm install
 COPY app ./app
 COPY prisma ./prisma
+COPY .env .
 RUN npx prisma generate
+# RUN npx prisma migrate dev --name init
 CMD \
-  npm run dev;
+  if [ -f package-lock.json ]; then npm run dev; \
+  fi
 # # Rebuild the source code only when needed
 # FROM base AS builder
 # WORKDIR /app
