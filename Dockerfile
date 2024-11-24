@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:21-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -11,6 +11,8 @@ COPY package.json package-lock.json* ./
 RUN npm install
 COPY app ./app
 COPY prisma ./prisma
+COPY next.config.mjs .
+COPY tsconfig.json .
 COPY .env .
 RUN npx prisma generate
 # RUN npx prisma migrate dev --name init
