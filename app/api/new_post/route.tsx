@@ -3,7 +3,7 @@ import { prisma } from "@/app/lib/data_acces"
 import { news_interface } from "@/app/lib/data_acces";
 import { News_data } from "@/app/lib/data_acces"
 
-export async function string_parser(content_type: string, parsed_body: string){
+async function string_parser(content_type: string, parsed_body: string){
   content_type = "--" + content_type.replace("multipart/form-data; boundary=", "");
   let blocks: string[] = parsed_body.split(content_type);
   blocks = blocks.slice(2, -1)

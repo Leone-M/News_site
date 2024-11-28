@@ -1,7 +1,9 @@
 services:
   news-site:
     container_name: news-site
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     env_file:
       - .env
@@ -13,6 +15,7 @@ services:
       - db
     networks:
       - my_network
+    # command: sh -c "npx prisma migrate dev && --name init npm run dev"
 
   db:
     image: postgres
@@ -20,7 +23,7 @@ services:
     env_file:
       - .env
     ports:
-      - "5333:5333"
+      - "5432:5432"
     networks:
       - my_network
     # healthcheck:
@@ -44,4 +47,3 @@ services:
 
 networks:
   my_network:
-    external: true
