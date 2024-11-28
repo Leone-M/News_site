@@ -1,21 +1,21 @@
 services:
   news-site:
     container_name: news-site
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: node:21-alpine
+    # build: .
     restart: always
+    working_dir: /app
     env_file:
       - .env
     volumes:
-      - ./app:/app:Z
+      - .:/app:Z
     ports:
       - "3000:3000"
     depends_on:
       - db
     networks:
       - my_network
-    # command: sh -c "npx prisma migrate dev && --name init npm run dev"
+    command: sh -c "npm install && npx prisma migrate dev --name init && npx tsx ./prisma/seed.ts && npm run dev"
 
   db:
     image: postgres

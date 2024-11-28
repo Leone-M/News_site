@@ -1,3 +1,4 @@
+"use server";
 import {news_interface} from "@/app/lib/data_acces"
 import post_fetcher from "@/app/lib/script"
 import Image from "next/image";
@@ -21,7 +22,8 @@ function Date({ date }: { date: string }) {
 }
 
 export default async function NewsBlock() {
-  news_posts = await post_fetcher(news_posts)
+try
+  {  news_posts = await post_fetcher(news_posts)
   // determines one news block and add if missing
   if (news_posts.length > news.length) {
     var news_blocks: any[] = [];
@@ -53,5 +55,13 @@ export default async function NewsBlock() {
     news = news_blocks;
   }
   // returns all news in <div> block
-  return <div className="grid box-border border-x-4 border-transparent">{news}</div>;
+  return <div className="grid box-border border-x-4 border-transparent">{news}</div>;}
+catch {
+  console.error("Error fetching news");
+  return (
+    <div className="text-center">
+      <p>Error fetching news</p>
+    </div>
+  );
+}
 }

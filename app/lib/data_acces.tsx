@@ -9,7 +9,7 @@ export class News_data implements news_interface{
     "date": string;
   };
   
-  export interface news_interface {
+export interface news_interface {
     id: number
     title: string,
     image_url: string,
