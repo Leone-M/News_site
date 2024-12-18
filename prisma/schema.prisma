@@ -10,13 +10,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 model newsPost {
   id Int @id @default(autoincrement())
   title String
-  image_url String
+  image_url String @default("")
   article String
   date String
 }
